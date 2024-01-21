@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
   const sellingPriceInput = document.getElementById("sellingPrice");
   const costPriceInput = document.getElementById("costPrice");
+  const customMarginInput = document.getElementById("customMargin");
 
-  [sellingPriceInput, costPriceInput].forEach((input) => {
+  [sellingPriceInput, costPriceInput, customMarginInput].forEach((input) => {
     input.addEventListener("input", handleInput);
   });
 
@@ -18,9 +19,16 @@ function handleInput() {
     document.getElementById("sellingPrice").value
   );
   const costPrice = parseFloat(document.getElementById("costPrice").value);
+  const customMargin = parseFloat(
+    document.getElementById("customMargin").value
+  );
 
   if (!isNaN(sellingPrice) && !isNaN(costPrice)) {
     calculateMargins(sellingPrice, costPrice);
+  }
+
+  if (!isNaN(customMargin)) {
+    calculateCustomMargin(sellingPrice, costPrice, customMargin);
   }
 }
 
@@ -65,4 +73,30 @@ function applyZoomEffect() {
       element.classList.remove("zoomEffect");
     });
   }, 1000);
+}
+
+function calculateProfit(sellingPrice, costPrice, customMargin) {
+  const profitMargin = customMargin;
+  const profit = (costPrice * profitMargin) / 100;
+  return profit;
+}
+
+function calculateCustomMargin(sellingPrice, costPrice, customMargin) {
+  const calculatedProfit = calculateProfit(
+    sellingPrice,
+    costPrice,
+    customMargin
+  );
+  const customMarginResult = document.getElementById("customMarginResult");
+  customMarginResult.textContent = `${customMargin}% Custom Margin:Profit = $${calculatedProfit.toFixed(
+    2
+  )}`;
+
+  customMarginResult.addEventListener("mouseover", function () {
+    customMarginResult.classList.add("zoomEffect");
+  });
+
+  customMarginResult.addEventListener("mouseout", function () {
+    customMarginResult.classList.remove("zoomEffect");
+  });
 }

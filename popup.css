@@ -39,3 +39,10 @@ input {
   transform: scale(1.05);
   transition: transform 0.3s;
 }
+
+/* Add the following style */
+#customMarginResult {
+  color: #800080; /* Dark purple text color */
+  margin-top: 10px;
+  font-size: 16px;
+}
