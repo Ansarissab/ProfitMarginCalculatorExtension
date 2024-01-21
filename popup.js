@@ -1,21 +1,26 @@
 document.addEventListener("DOMContentLoaded", function () {
-  document
-    .getElementById("calculateMargins")
-    .addEventListener("click", calculateMargins);
+  const sellingPriceInput = document.getElementById("sellingPrice");
+  const costPriceInput = document.getElementById("costPrice");
+
+  [sellingPriceInput, costPriceInput].forEach((input) => {
+    input.addEventListener("input", handleInput);
+  });
 });
 
-function calculateMargins() {
+function handleInput() {
   const sellingPrice = parseFloat(
     document.getElementById("sellingPrice").value
   );
+  const costPrice = parseFloat(document.getElementById("costPrice").value);
 
-  if (isNaN(sellingPrice)) {
-    alert("Please enter a valid selling price.");
-    return;
+  if (!isNaN(sellingPrice) && !isNaN(costPrice)) {
+    calculateMargins(sellingPrice, costPrice);
   }
+}
 
+function calculateMargins(sellingPrice, costPrice) {
   const margins = [
-    10, 20, 25, 30, 35, 40, 45, 50, 60, 65, 70, 75, 80, 85, 90, 95, 100,
+    10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100,
   ];
   const resultContainer = document.getElementById("result");
   resultContainer.innerHTML = "";
@@ -23,9 +28,9 @@ function calculateMargins() {
   margins.forEach((margin) => {
     const calculatedMargin = calculateMargin(sellingPrice, margin);
     const resultElement = document.createElement("div");
-    resultElement.textContent = `${margin}% Margin: ${calculatedMargin.toFixed(
+    resultElement.textContent = `Profit : $${calculatedMargin.toFixed(
       2
-    )}`;
+    )} = ${margin}% Margin`;
     resultContainer.appendChild(resultElement);
   });
 }
