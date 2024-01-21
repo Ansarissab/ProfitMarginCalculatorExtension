@@ -1,13 +1,36 @@
 body {
-  width: 250px;
-  padding: 10px;
+  width: 300px;
+  padding: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f3f3f3;
+  color: #333;
 }
 
 input {
-  width: 100%;
+  width: calc(100% - 20px);
   margin-bottom: 10px;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
 }
 
 #result {
   margin-top: 10px;
+}
+
+#result div {
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#result div:hover {
+  background-color: #f0f8ff; /* Light blue on hover, adjust as needed */
 }
