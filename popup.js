@@ -58,7 +58,7 @@ function calculateMargins(sellingPrice, costPrice) {
 }
 
 function calculateMargin(sellingPrice, marginPercentage) {
-  const costPrice = sellingPrice / (1 + marginPercentage / 100);
+  const costPrice = sellingPrice - (sellingPrice * marginPercentage) / 100;
   return sellingPrice - costPrice;
 }
 
@@ -76,8 +76,7 @@ function applyZoomEffect() {
 }
 
 function calculateProfit(sellingPrice, costPrice, customMargin) {
-  const profitMargin = customMargin;
-  const profit = (costPrice * profitMargin) / 100;
+  const profit = (sellingPrice * customMargin) / 100;
   return profit;
 }
 
