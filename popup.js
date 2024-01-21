@@ -5,6 +5,12 @@ document.addEventListener("DOMContentLoaded", function () {
   [sellingPriceInput, costPriceInput].forEach((input) => {
     input.addEventListener("input", handleInput);
   });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "z") {
+      applyZoomEffect();
+    }
+  });
 });
 
 function handleInput() {
@@ -32,10 +38,31 @@ function calculateMargins(sellingPrice, costPrice) {
       2
     )} = ${margin}% Margin`;
     resultContainer.appendChild(resultElement);
+
+    resultElement.addEventListener("mouseover", function () {
+      resultElement.classList.add("zoomEffect");
+    });
+
+    resultElement.addEventListener("mouseout", function () {
+      resultElement.classList.remove("zoomEffect");
+    });
   });
 }
 
 function calculateMargin(sellingPrice, marginPercentage) {
   const costPrice = sellingPrice / (1 + marginPercentage / 100);
   return sellingPrice - costPrice;
+}
+
+function applyZoomEffect() {
+  const resultElements = document.querySelectorAll("#result div");
+  resultElements.forEach((element) => {
+    element.classList.add("zoomEffect");
+  });
+
+  setTimeout(() => {
+    resultElements.forEach((element) => {
+      element.classList.remove("zoomEffect");
+    });
+  }, 1000);
 }

@@ -34,3 +34,8 @@ input {
 #result div:hover {
   background-color: #f0f8ff; /* Light blue on hover, adjust as needed */
 }
+
+#result div.zoomEffect {
+  transform: scale(1.05);
+  transition: transform 0.3s;
+}
